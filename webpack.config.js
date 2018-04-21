@@ -7,7 +7,7 @@ module.exports = {
 	filename: 'main.js',
 	libraryTarget: 'umd',
 	globalObject: 'this',
-	library: 'NlsNet',
+	library: 'NeuralNetwork',
     },
     module: {
 	rules: [
