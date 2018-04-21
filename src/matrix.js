@@ -180,12 +180,21 @@ function testMatrixMultiplication(){
 
     m = new Matrix(1,3);
     m.loadData([1,2,3]);
-
     m2 = new Matrix(3,3);
     m2.loadData([1,2,3,4,5,6,7,8,9]);
     res = m.mul(m2);
     correct = [14,32,50];
     verify(res, correct);
+
+
+    m = new Matrix(1,3);
+    m.loadData([1,2,3]);
+    res = m.transpose();
+    correct = [1,2,3];
+    verify(res, correct);
+
+
+
 
     console.log('Matrix Multiplication passed all tests!');
 }
