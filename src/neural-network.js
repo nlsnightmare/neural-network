@@ -106,5 +106,4 @@ export default class NeuralNetwork {
 	    l.data = genes.splice(0,l.size);
 	}
     }
-
 }
