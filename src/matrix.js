@@ -21,7 +21,16 @@ export default class Matrix {
     }
 
     transpose(){
-	throw new Error("Not implemented yet!");
+	let m = new Matrix(this.m, this.n);
+
+	for(let x = 0; x < this.n; x++){
+	    for(let y = 0; y < this.m; y++){
+		console.log('setting el: ' + this.getItem(x,y));
+		m.setItem(y,x,this.getItem(x,y));
+	    }
+	}
+	console.log(m);
+	return(m);
     }
 
     static zero(n,m){
@@ -50,7 +59,7 @@ export default class Matrix {
 
     setItem(x,y,val){
 	if (this.m == 1) {
-	    let idx = y;
+	    let idx = y + x;
 	    this.data[idx] = val;
 	    return;
 	}
