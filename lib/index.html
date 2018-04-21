@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="./main.js"></script>
+    <script>
+     let nn = new NlsNet.NeuralNetwork({
+	 inputs: 2,
+	 outputs: 2,
+	 hidden: [2]
+     });
+
+     let r = nn.compute([1,0]);
+     console.log(r.percentages)
+    </script>
+  </body>
+</html>
