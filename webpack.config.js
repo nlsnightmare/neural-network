@@ -4,7 +4,7 @@ module.exports = {
     entry: './src/entry.js',
     output: {
 	path: path.resolve(__dirname, 'lib'),
-	filename: 'main.js',
+	filename: 'neuralnetwork.js',
 	libraryTarget: 'umd',
 	globalObject: 'this',
 	library: 'NeuralNetwork',
