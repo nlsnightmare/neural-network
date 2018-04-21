@@ -6,8 +6,11 @@ It was designed with the goal to be easy to use.
 
 * How to use it?
 Step 1: Create a NeuralNetwork object
+
 Step 2: Train the neural network using genetic algorithms (more on that later)
+
 Step 3: ???
+
 Step 4: Profit!
 #+BEGIN_SRC js
   //This will create a neuralnetwork with 2 inputs,
