@@ -18,9 +18,9 @@ export default class NeuralNetwork {
 	let inputs, outputs, hidden;
 	if (typeof args[0] == 'object') {
 	    inputs = args[0].inputs;
-	    hidden = args[0].hidden;
-	    hidden.push(outputs);
+	    hidden = args[0].hidden.slice(0);
 	    outputs = args[0].outputs;
+	    hidden.push(outputs);
 	}
 	else {
 	    inputs = args[0];
@@ -36,8 +36,6 @@ export default class NeuralNetwork {
 
 	this.layers.push(new Matrix(inputs + 1, hidden[0]));
 	for (let i = 1; i < hidden.length; i++) {
-	    console.log('creating hidden layer ' + i);
-	    console.log('it should have ' + hidden[i - 1] + ' outputs and ' + this.layers[i - 1].n + ' inputs');
 	    this.layers.push(new Matrix(this.layers[i - 1].m + 1, hidden[i - 1]));
 	}
 	this.layers.forEach((l) => l.randomize());
@@ -59,18 +57,21 @@ export default class NeuralNetwork {
 	input_matrix.data = inputs;
 
 
-	let res = input_matrix.mul(this.layers[0]);
+	let res;
+	let i;
+	for (i = 0; i < this.layers.length - 1; i++) {
+	    let layer = this.layers[i];
+	    
+	    res = input_matrix.mul(layer);
+	    res = res.transpose();
+	    res.data.push(1);
+	    res.m++;
+	    res.data = res.data.map(relu);
+	}
 
-	//FIXME: Add matrix transposition
-	res.m = res.n + 1;
-	res.n = 1;
-	res.data = res.data.map(relu);
-	res.data.push(1);
-
-
-	let res2 = res.mul(this.outputLayer);
+	let res2 = res.mul(this.layers[i]);
 	let percentages = softmax(res2.data);
-	var i = percentages.indexOf(Math.max(...percentages));
+	i = percentages.indexOf(Math.max(...percentages));
 
 	return {
 	    percentages,

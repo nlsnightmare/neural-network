@@ -6,10 +6,10 @@ let btn = document.getElementById('test');
 let res = document.getElementById('res');
 let other = document.getElementById('other');
 
-// let NUM_NETS = 100;
-let NUM_NETS = 1;
-// let NUM_GENS = 1000;
-let NUM_GENS = 1;
+let NUM_NETS = 100;
+// let NUM_NETS = 1;
+let NUM_GENS = 1000;
+// let NUM_GENS = 1;
 let i = 0;
 
 let networks = [];
@@ -23,8 +23,10 @@ let testingData = [
 
 let NetworkStructure = {
     inputs: 2,
-    hidden: [2,1],
+    hidden: [ 2,10,2 ],
     outputs: 2,
+    normalizeInput: true,
+    output: 'perc'
 };
 
 
@@ -54,7 +56,7 @@ window.onload = () => {
 };
 
 
-let speed = 1;
+let speed = 10;
 function train() {
     res.textContent = 'Training generation ' + i;
     for(let g = 0; g < speed; g++){
