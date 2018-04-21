@@ -25,12 +25,10 @@ export default class Matrix {
 
 	for(let x = 0; x < this.n; x++){
 	    for(let y = 0; y < this.m; y++){
-		console.log('setting el: ' + this.getItem(x,y));
 		m.setItem(y,x,this.getItem(x,y));
 	    }
 	}
-	console.log(m);
-	return(m);
+	return m;
     }
 
     static zero(n,m){
