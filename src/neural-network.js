@@ -24,11 +24,19 @@ export default class NeuralNetwork {
 	    normalizeInput = args[0].normalizeInput;
 	    normalizeOutput = args[0].normalizeOutput;
 	    hidden.push(outputs);
+
+	    this.options = args[0];
 	}
 	else {
 	    inputs = args[0];
 	    hidden = args[1];
 	    outputs = args[2];
+
+	    this.options = {
+		inputs: args[0],
+		hidden: [args[1]],
+		outputs: args[2]
+	    };
 	}
 	this.score = 0;
 	this.inputs = inputs;
