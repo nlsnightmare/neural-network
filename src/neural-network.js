@@ -94,16 +94,17 @@ export default class NeuralNetwork {
     }
 
     getGenes(){
-	return this.layer1.data.concat(this.outputLayer.data);
+	let genes = [];
+	for (let l of this.layers) {
+	    genes = genes.concat(l.data);
+	}
+	return genes;
     }
 
     setGenes(genes){
-	let layer1 = genes.slice(0,this.layer1.size);
-	let outputGenes = genes.slice(this.layer1.size + 1,this.layer1.size + this.outputLayer.size);
-
-	this.layer1.data = layer1;
-	this.outputLayer.data = outputGenes;
+	for (let l of this.layers) {
+	    l.data = genes.splice(0,l.size);
+	}
     }
-
 
 }
