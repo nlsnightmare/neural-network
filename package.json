@@ -1,0 +1,16 @@
+{
+    "name": "neural-network",
+    "version": "1.0.0",
+    "description": "",
+    "main": "./src/main.js",
+    "scripts": {
+	"watch": "webpack --watch --mode development",
+	"test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+	"webpack": "^4.6.0",
+	"webpack-cli": "^2.0.14"
+    }
+}
