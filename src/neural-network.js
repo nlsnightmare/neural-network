@@ -16,10 +16,13 @@ function softmax(arr) {
 export default class NeuralNetwork {
     constructor(...args){
 	let inputs, outputs, hidden;
+	let normalizeInput, normalizeOutput;
 	if (typeof args[0] == 'object') {
 	    inputs = args[0].inputs;
 	    hidden = args[0].hidden.slice(0);
 	    outputs = args[0].outputs;
+	    normalizeInput = args[0].normalizeInput;
+	    normalizeOutput = args[0].normalizeOutput;
 	    hidden.push(outputs);
 	}
 	else {
@@ -30,6 +33,9 @@ export default class NeuralNetwork {
 	this.score = 0;
 	this.inputs = inputs;
 	this.outputs = outputs;
+
+	this.normalizeInput = normalizeInput !== undefined? normalizeInput:true;
+	this.normalizeOutput = normalizeOutput !== undefined? normalizeOutput:true;
 
 	this.layers = [];
 
@@ -44,12 +50,14 @@ export default class NeuralNetwork {
     compute(input){
 	let inputs = input.slice(0);
 
-	let max = Math.max(...inputs);
-	if (max == 0) {
-	    max = 1;
-	}
+	if (this.normalizeInput) {
+	    let max = Math.max(...inputs);
+	    if (max == 0) {
+		max = 1;
+	    }
 
-	inputs = inputs.map((v) => v / max);
+	    inputs = inputs.map((v) => v / max);
+	}
 	inputs.push(1); // Add the bias
 
 
@@ -69,14 +77,20 @@ export default class NeuralNetwork {
 	    res.data = res.data.map(relu);
 	}
 
+	let percentages;
 	let res2 = res.mul(this.layers[i]);
-	let percentages = softmax(res2.data);
-	i = percentages.indexOf(Math.max(...percentages));
+	if (this.normalizeOutput) 
+	{
+	    percentages = softmax(res2.data);
+	    i = percentages.indexOf(Math.max(...percentages));
 
-	return {
-	    percentages,
-	    max: i
-	};
+	    return {
+		percentages,
+		max: i
+	    };
+	}
+	else 
+	    return res2.data.slice();
     }
 
     getGenes(){

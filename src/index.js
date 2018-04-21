@@ -26,7 +26,7 @@ let NetworkStructure = {
     hidden: [ 2,10,2 ],
     outputs: 2,
     normalizeInput: true,
-    output: 'perc'
+    normalizeOutput: true
 };
 
 
