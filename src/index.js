@@ -23,7 +23,7 @@ let testingData = [
 
 let NetworkStructure = {
     inputs: 2,
-    hidden: [ 2,10,2 ],
+    hidden: [2],
     outputs: 2,
     normalizeInput: true,
     normalizeOutput: true
