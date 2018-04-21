@@ -114,4 +114,32 @@ export default class NeuralNetwork {
 	    l.data = genes.splice(0,l.size);
 	}
     }
+
+
+    crossover(other,mutationRate){
+	let g1 = this.getGenes();
+	let g2 = other.getGenes();
+	if (g1.length != g2.length) {
+	    throw new Error("Can't crossover between two networks of different size!");
+	}
+
+	let newGenes = [];
+	for(let i = 0; i < g1.length; i++){
+	    if (Math.random() > 0.5)
+		newGenes.push(g1[i]);
+	    else
+		newGenes.push(g2[i]);
+
+	    if (Math.random() < mutationRate) {
+		if (Math.random() > 0.5)
+		    newGenes[i] = (Math.random()* 2 - 1);
+		else
+		    newGenes[i] += (Math.random()* 2 - 1) * 0.1;
+	    }
+	}
+
+	let nn = new NeuralNetwork(this.options);
+	nn.setGenes(newGenes);
+	return nn;
+    }
 }
