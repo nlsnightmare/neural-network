@@ -1,0 +1,49 @@
+#+TITLE: NeuralNetwork Library By Nls
+
+* What is it? 
+This is a Neural Network library written in javascript.
+It was designed with the goal to be easy to use.
+
+* How to use it?
+Step 1: Create a NeuralNetwork object
+Step 2: Train the neural network using genetic algorithms (more on that later)
+Step 3: ???
+Step 4: Profit!
+#+BEGIN_SRC js
+  //This will create a neuralnetwork with 2 inputs,
+  //3 hidden neurons and 2 outputs
+  let nn = new NeuralNetwork(2,3,2);
+
+  //You can also have more than one layer!
+  let nn2 = new NeuralNetwork({
+      inputs: 2,
+      hidden: [4,4],
+      outputs: 3
+  });
+#+END_SRC
+
+After training, simply call /compute/ on the object with an array containing
+the desired inputs
+*Note!* By default, the network normalizes the inputs to be in range 0-1. If you want to
+disable that, simple add the /normalizeInput: false/ option when creating it.
+#+BEGIN_SRC js
+  let result = nn.compute([1,2]);
+#+END_SRC
+
+The result by default is an object containing: 
+1) an array *percentages* which contains a percentage for each output
+2) a max key which is the index of the output neuron with maximum value
+
+If you want to recieve raw data instead, simply add the /normalizeOutput: true/ option 
+when creating the network.
+
+
+* How to train it?
+For now there is no backpropagate function. Untill that is added we suggest you train it
+using genetic algorithms instead. 
+Example of simple crossover between 2 networks: 
+#+BEGIN_SRC js
+  // Now the child's genes are a mix of each parent's with
+  // a mutation rate of 1%
+  let child = parent1.crossover(parent2, 0.01);
+#+END_SRC
