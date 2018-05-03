@@ -5,12 +5,15 @@ function relu(item) {
 }
 
 
+
+
 function softmax(arr) {
     return arr.map(function(value,index) { 
 	return Math.exp(value) /
 	    arr.map( function(y){ return Math.exp(y); } ).reduce( function(a,b){ return a+b; });
     });
 }
+
 
 
 export default class NeuralNetwork {
@@ -49,8 +52,8 @@ export default class NeuralNetwork {
 
 
 	this.layers.push(new Matrix(inputs + 1, hidden[0]));
-	for (let i = 1; i < hidden.length; i++) {
-	    this.layers.push(new Matrix(this.layers[i - 1].m + 1, hidden[i - 1]));
+	for (let i = 0; i < hidden.length; i++) {
+	    this.layers.push(new Matrix(this.layers[i].m + 1, hidden[i]));
 	}
 	this.layers.forEach((l) => l.randomize());
     }
@@ -73,16 +76,17 @@ export default class NeuralNetwork {
 	input_matrix.data = inputs;
 
 
-	let res;
+	let res = input_matrix;
 	let i;
 	for (i = 0; i < this.layers.length - 1; i++) {
 	    let layer = this.layers[i];
 	    
-	    res = input_matrix.mul(layer);
+	    res = res.mul(layer);
 	    res = res.transpose();
 	    res.data.push(1);
 	    res.m++;
-	    res.data = res.data.map(relu);
+	    // res.data = res.data.map(relu);
+	    res.data = res.data.map(Math.tanh);
 	}
 
 	let percentages;
@@ -131,10 +135,12 @@ export default class NeuralNetwork {
 		newGenes.push(g2[i]);
 
 	    if (Math.random() < mutationRate) {
-		if (Math.random() > 0.5)
-		    newGenes[i] = (Math.random()* 2 - 1);
+		let r = Math.random()* 2 - 1;
+		if (Math.random() < 0.6) {
+		    newGenes[i] = r;
+		}
 		else
-		    newGenes[i] += (Math.random()* 2 - 1) * 0.1;
+		    newGenes[i] += r *0.1;
 	    }
 	}
 
