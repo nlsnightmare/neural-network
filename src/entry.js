@@ -1,1 +1,4 @@
-module.exports = require('./neural-network.js').default;
+module.exports = {
+    NeuralNetwork: require('./neural-network.js').default,
+    Matrix: require('./matrix.js').default
+};

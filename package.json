@@ -5,13 +5,14 @@
    "main": "./src/main.js",
    "scripts": {
       "watch": "webpack --watch --mode development",
-      "test": "echo \"Error: no test specified\" && exit 1"
+      "build": "webpack -d",
+      "test": "node ./tests/matrix.js"
    },
    "author": "",
    "license": "ISC",
    "devDependencies": {
       "babel-loader": "^7.1.4",
       "webpack": "^4.6.0",
-      "webpack-cli": "^2.0.14"
+      "webpack-cli": "^3.2.1"
    }
 }

@@ -1,4 +1,5 @@
-import Matrix from '../src/matrix.js';
+const Matrix = require('../lib/neuralnetwork.js').Matrix;
+console.log(Matrix);
 
 function testMatrixMultiplication(){
     console.log('Starting Matrix multiplication tests...');
